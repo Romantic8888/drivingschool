@@ -16,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.df.service.CoachService;
 import com.df.service.StudentService;
-import com.sun.org.apache.bcel.internal.generic.SIPUSH;
 import com.df.domain.Student;
 import com.df.domain.User;
 import com.df.page.Page;
@@ -43,51 +42,44 @@ public class StudentController {
 		if (txtname == null) {
 			txtname = "";
 			students = studentService.selectAll();
-		} else {
+		}else {
 			String nameStr = "%" + txtname + "%";
 			students = studentService.selectByName(nameStr);
 		}
+		// vo.setCurrentPage(currentPage);
+		// vo=this.studentService.pageFuzzyselect(txtname, vo);
+//		Student stu=studentService.selectByPrimaryKey(1);
+////		System.out.print(stu.getName());
+//		List<Student> students = new ArrayList<Student>();
+//		students.add(stu);
 		mv.addObject("list", students);
 		mv.addObject("txtname", txtname);
 		return mv;
 	}
-
 	@RequestMapping("/toadd")
-	public ModelAndView toadd() {
-		ModelAndView mv = new ModelAndView("/student/add");
+	public ModelAndView toadd(){
+		ModelAndView  mv= new ModelAndView("/student/add");
 		return mv;
 	}
-
+	
 	@RequestMapping("/toupdate")
-	public ModelAndView toupdate() {
-		ModelAndView mv = new ModelAndView("/student/update");
+	public ModelAndView toupdate(){
+		ModelAndView  mv= new ModelAndView("/student/update");
 		return mv;
 	}
-
-	@RequestMapping(value = "/delete", method = { RequestMethod.GET })
-	public ModelAndView delete(Integer id) {
-		ModelAndView mv = null;
-		;
-		int deleteByPrimaryKey = studentService.deleteByPrimaryKey(id);
-		if (1 == deleteByPrimaryKey) {
-			mv = new ModelAndView("/main/main");
-		}
-		return mv;
-	}
-
-	@RequestMapping(value = "/toupdateStudent", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView toupdateStudent(int userId, String userName, int sex, String signTime, String credentID,
-			String phone, int coachId, String memo) {
+	
+	@RequestMapping(value = "/toupdateStudent", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView toupdateStudent(int userId,String userName,int sex,String signTime,String credentID,String phone,int coachId,String memo){
 		System.out.print(userId);
 		System.out.print(userName);
 		System.out.print(sex);
-
+		
 		System.out.print(credentID);
 		System.out.print(phone);
 		System.out.print(coachId);
 		System.out.print(memo);
-
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		
+		SimpleDateFormat sdf =   new SimpleDateFormat( "yyyy-MM-dd" );
 		Date signtime = new Date();
 		try {
 			signtime = sdf.parse(signTime);
@@ -106,18 +98,17 @@ public class StudentController {
 		record.setPhone(phone);
 		record.setCoachId(coachId);
 		record.setMemo(memo);
-		if (studentService.updateByPrimaryKey(record) == 1) {
-			mv = new ModelAndView("/main/main");
-		} else {
-			mv = new ModelAndView("/student/update");
+		if(studentService.updateByPrimaryKey(record) == 1) {
+			mv = new ModelAndView("/student/student");
+		}else {
+			mv= new ModelAndView("/student/update");
 		}
 		return mv;
 	}
-
-	@RequestMapping(value = "/toaddStudent", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView toaddStudent(int userId, String userName, int sex, String signTime, String credentID,
-			String phone, int coachId, String memo) {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	
+	@RequestMapping(value = "/toaddStudent", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView toaddStudent(int userId,String userName,int sex,String signTime,String credentID,String phone,int coachId,String memo) {
+		SimpleDateFormat sdf =   new SimpleDateFormat( "yyyy-MM-dd" );
 		Date signtime = new Date();
 		try {
 			signtime = sdf.parse(signTime);
@@ -137,10 +128,10 @@ public class StudentController {
 		record.setMemo(memo);
 		User user = new User();
 		user.setUsername(userName);
-		if (studentService.insert(record) == 1) {
-			mv = new ModelAndView("/main/main");
-		} else {
-			mv = new ModelAndView("/student/add");
+		if(studentService.insert(record) == 1) {
+			mv = new ModelAndView("/student/student");
+		}else {
+			mv= new ModelAndView("/student/add");
 		}
 		return mv;
 	}

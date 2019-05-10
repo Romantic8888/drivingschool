@@ -21,7 +21,7 @@ public class StudentServiceImpl implements StudentService{
 	@Override
 	public int deleteByPrimaryKey(Integer id) {
 		// TODO Auto-generated method stub
-		return studentDAO.deleteByPrimaryKey(id);
+		return 0;
 	}
 
 	@Override
@@ -33,7 +33,7 @@ public class StudentServiceImpl implements StudentService{
 	@Override
 	public int insertSelective(Student record) {
 		// TODO Auto-generated method stub
-		return studentDAO.insertSelective(record);
+		return 0;
 	}
 
 	@Override
@@ -45,13 +45,13 @@ public class StudentServiceImpl implements StudentService{
 	@Override
 	public int updateByPrimaryKeySelective(Student record) {
 		// TODO Auto-generated method stub
-		return studentDAO.updateByPrimaryKeySelective(record);
+		return 0;
 	}
 
 	@Override
 	public int updateByPrimaryKey(Student record) {
 		// TODO Auto-generated method stub
-		return studentDAO.updateByPrimaryKey(record);
+		return 0;
 	}
 
 	@Override
