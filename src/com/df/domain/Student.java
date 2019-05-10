@@ -3,13 +3,13 @@ package com.df.domain;
 import java.util.Date;
 
 public class Student {
-	//id
+
 	private Integer id;
 
 	private String name;
 
 	private Integer sex;
-	//日期
+
 	private Date signTime;
 
 	private String credentNo;
